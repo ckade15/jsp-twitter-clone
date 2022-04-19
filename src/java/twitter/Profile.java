@@ -45,19 +45,21 @@ public class Profile extends HttpServlet {
         String deletePic = request.getParameter("profile_del");
         if (deletePic != null) {
             UserModel.deleteProfilePic(user.getUsername());
+            response.sendRedirect("Profile");
+            
+        }else{
+            request.setAttribute("filename", user.getFilename());
+
+            ArrayList<Tweet> tweets = TweetModel.getProfileTweets(user.getId());
+            request.setAttribute("tweets", tweets);
+
+            String url = "/profile.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+            
         }
         
         
         
-        request.setAttribute("filename", user.getFilename());
-        
-
-        
-        ArrayList<Tweet> tweets = TweetModel.getProfileTweets(user.getId());
-        request.setAttribute("tweets", tweets);
-        
-        String url = "/profile.jsp";
-        getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

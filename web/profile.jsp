@@ -210,7 +210,7 @@
                                  "/>
                         </c:if>
                     </p>
-                    <a href="#" id="delBtn" style="margin-bottom: 30px; margin-top: 10px;">Delete Tweet</a>
+                    <a href="DeleteTweet?tweet_id=${tweet.getId()}" id="delBtn" style="margin-bottom: 30px; margin-top: 10px;">Delete Tweet</a>
                 </div>
             </c:forEach>
             

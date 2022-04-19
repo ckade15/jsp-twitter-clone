@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,11 +30,36 @@ public class Discover extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<User> users = UserModel.getUsers();
-        request.setAttribute("users", users);
+        
+        
+        String followed = request.getParameter("followed_by_user_id");
+        String following = request.getParameter("following_user_id");
+        
+        if (followed != null){
+            int followed_by_user_id = Integer.parseInt(followed);
+            int following_user_id = Integer.parseInt(following);
+            
+            if(UserModel.ensureFollowed(followed_by_user_id, following_user_id)){
+                UserModel.unfollow(followed_by_user_id, following_user_id);
+                response.sendRedirect("Discover");
+            }else{
+                UserModel.followUser(followed_by_user_id, following_user_id);
+                response.sendRedirect("Discover");
+            }
+        }else{
+            ArrayList<User> users = UserModel.getUsers();
+            request.setAttribute("users", users);
 
-        String url = "/discover.jsp";
-        getServletContext().getRequestDispatcher(url).forward(request, response);
+            HttpSession session = request.getSession();
+            String username = (String)session.getAttribute("username");
+            User user = UserModel.getUser(username);
+        
+        request.setAttribute("user_id", user.getId());
+            String url = "/discover.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response); 
+        }
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

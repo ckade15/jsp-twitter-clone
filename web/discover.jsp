@@ -40,11 +40,7 @@
                padding: 30px;
                margin-bottom: 50px;
                ">
-            <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th></th>
-            </tr>
+
             <c:forEach var="user" items="${users}">
                 <tr>
                     <td><c:out value="${user.id}" /></td>
@@ -56,6 +52,7 @@
                         background-size: cover;
                         " 
                     /><td>
+                    <td><a href="?followed_by_user_id=${user_id}&following_user_id=${user.getId()}">Follow</a></td>
                     
                 </tr>
             </c:forEach>
