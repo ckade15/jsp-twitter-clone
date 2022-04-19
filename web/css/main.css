@@ -1,0 +1,70 @@
+/* 
+    Created on : Apr 16, 2022, 11:04:23 PM
+    Author     : chris
+*/
+body{
+    margin: 0;
+    background: url("../assets/bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Georgia;
+}
+header{
+    background-color: lightgray;
+    width: 100%;
+    padding: 10px;  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#twitter-logo{
+    margin-left: 50px;
+    height: 50px;
+    width: 50px; 
+}
+
+.profile{
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 100px;
+    padding: 15px;
+    border-radius: 15px; 
+    background-color: #00ffff;
+    color: #333333;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 2px 2px 2px graytext;
+    
+}
+.profile:hover{
+    background-color: #999999;
+    color: #99ffff;
+}
+
+h2{
+    font-size: 30px;
+    color: #0012e1;
+}
+div{
+    width: 30%;
+}
+
+#logout{
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 100px;
+    padding: 15px;
+    border-radius: 15px; 
+    background-color: #000095;
+    color: lavender;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 2px 2px 2px graytext;
+    
+}
+#logout:hover{
+    background-color: #999999;
+    color: #99ffff;
+}
+

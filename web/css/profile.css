@@ -1,0 +1,117 @@
+/* 
+    Created on : Apr 17, 2022, 12:05:26 AM
+    Author     : chris
+*/
+body{
+    margin: 0;
+    background: url("../assets/bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Georgia;
+    height: 100%;
+}
+header{
+    background-color: lightgray;
+    width: 100%;
+    padding: 10px;  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#twitter-logo{
+    margin-left: 50px;
+    height: 50px;
+    width: 50px; 
+}
+
+.profile{
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 100px;
+    padding: 15px;
+    border-radius: 15px; 
+    background-color: #00ffff;
+    color: #333333;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 2px 2px 2px graytext;
+    cursor: pointer;
+    
+}
+.profile:hover{
+    background-color: #999999;
+    color: #99ffff;
+}
+
+h2{
+    font-size: 30px;
+    color: #0012e1;
+}
+
+
+section{
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    padding: 10px;
+    width: 100%;
+}
+#profile-pic{
+    border-radius: 100%;
+    border: 2px solid #0000fa;
+}
+p{
+    font-size: 20px;
+}
+
+form{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+}
+
+#about{
+    display: flex;
+    flex-direction: column;
+}
+
+h5{
+    font-size: 20px;
+}
+
+#logout{
+    text-decoration: none;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 15px; 
+    background-color: #000095;
+    color: lavender;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 2px 2px 2px graytext;
+    
+}
+#logout:hover{
+    background-color: #999999;
+    color: #99ffff;
+}
+
+#delBtn{
+    text-decoration: none;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 15px; 
+    background-color: #000095;
+    color: lavender;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 2px 2px 2px graytext;
+    margin-bottom: 30px;
+}
+#delBtn:hover{
+    background-color: #999999;
+    color: #99ffff;
+}
