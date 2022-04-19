@@ -75,7 +75,7 @@
                      position: absolute;
                      width: 100%;
                      ">
-                    <a href="#" style="
+                    <a href="?profile_del=${username}" style="
                        background-image: url('assets/del_white.svg');
                        background-position: 5px;
                        height: 30px;

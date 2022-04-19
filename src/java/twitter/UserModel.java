@@ -186,16 +186,14 @@ public class UserModel {
     public static void deleteProfilePic(String user){
         try{
             Connection connection = DatabaseConnection.getConnection();
-            int id = Integer.parseInt(user);
             
-            String query = "update user set filename = ?, image = ?"
-                    + "where id = ?";
+            String query = "update user set filename = ?"
+                    + " where username = ?";
             
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, null);
-            statement.setString(2, null);
-            statement.setInt(3, id);
+            statement.setString(2, user.trim());
             
             statement.execute();
             

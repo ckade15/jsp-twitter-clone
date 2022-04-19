@@ -4,10 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Discover.java</file>
+            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/DatabaseConnection.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/CreateAccount.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/create_tweet.jsp</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/TweetModel.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Login.java</file>
+            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Twitter.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Upload.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/DeleteTweet.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/create_user.jsp</file>
@@ -16,6 +18,7 @@
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Profile.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/discover.jsp</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/login.jsp</file>
+            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/User.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/profile.jsp</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/GetImage.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/CreateTweet.java</file>

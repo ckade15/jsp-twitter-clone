@@ -42,6 +42,11 @@ public class Profile extends HttpServlet {
         String username = (String)session.getAttribute("username");
         User user = UserModel.getUser(username);
         
+        String deletePic = request.getParameter("profile_del");
+        if (deletePic != null) {
+            UserModel.deleteProfilePic(user.getUsername());
+        }
+        
         
         
         request.setAttribute("filename", user.getFilename());
@@ -67,16 +72,7 @@ public class Profile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try{
-            String id = request.getParameter("delete_id");
-            if (id.length() > 0){
-                UserModel.deleteProfilePic(id);
-                
-            }
-        }catch(Exception e){
-            
-        }
+        processRequest(request, response);
     }
 
     /**
