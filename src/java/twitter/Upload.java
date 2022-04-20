@@ -22,7 +22,7 @@ import javax.servlet.http.Part;
  *
  * @author chris
  */
-@MultipartConfig(maxFileSize = 1000000)
+@MultipartConfig(maxFileSize = 1000000000)
 public class Upload extends HttpServlet {
 
     /**
@@ -39,7 +39,7 @@ public class Upload extends HttpServlet {
         
         String action = request.getParameter("action");
         
-        if (action.equalsIgnoreCase("delete")){
+        if (action.equals("delete")){
             try{
                HttpSession session = request.getSession();
                 String username = (String)session.getAttribute("username");

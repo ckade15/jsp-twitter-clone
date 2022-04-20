@@ -4,6 +4,7 @@
     Author     : chris
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -59,43 +60,60 @@
               background-color: lightsalmon;  
               color: #333333;
             }
+            
+            #like{
+                background-image: url('assets/b_like.svg');
+            }
+            #like:hover{
+               background-image: url('assets/w_like.svg'); 
+            }
+        
         </style>
     </head>
     <body>
-        <header>
+        <header style="
+                padding: 30px;
+                ">
             <img src="assets/twitter-logo.png" id="twitter-logo"/>
             
             <div style="
-                 width: 50%;
+                 width: 65%;
                  display: flex;
                  
                  ">
                 <a href="Twitter" class="profile">Home</a>
                 <a href="Discover" class="profile">Discover</a> 
+                <a href="Profile" class="profile">Profile</a>
                 <a href="Logout" id="logout"  >Logout</a> 
             </div>
             
         </header>
         <section style="
             margin-top: 20px;
+            display: flex;
+            
             ">
-            <h2>${user}'s Profile</h2>        
+            <h2 style="
+                font-size: 40px;
+                
+                ">${user.getUsername()}'s Profile</h2>        
             <c:if test="${(filename != null)}">
-                <img src="GetImage?username=${name}" width="340" height="400" style="
+                <img src="GetImage?username=${user}" width="340" height="400" style="
                      margin-top:20px;
                      margin-right: 50px;
                      " id="profile-pic" />
-                
-            </c:if>
-        </section>
-        <hr style="
+                <hr style="
             width: 60%;
             height: 2px;
             margin: 200px auto;
             background-image: linear-gradient(to top, #020024, #091579, #00d4ff);
             border-radius: 15px;
             ">
+            </c:if>
+        </section>
+        
         <!-- Display users tweets with the option to delete tweets -->
+        
         <section style="
                  display: flex;
                  flex-direction: column;
@@ -116,7 +134,7 @@
                color: navy;
                font-weight: bold;
                margin-top: 35px;
-               ">${name} Tweets</p>
+               "><c:out value="${name}"></c:out> Tweets</p>
             </a>
             <div style="
                  width: 100%;
@@ -159,6 +177,22 @@
                                      "/>
                             </c:if>
                         </p>
+                        <div style="
+                                 display: flex;
+                                 justify-content: space-evenly;
+                                 place-items: center;
+                                 width: 100%;
+                                 ">
+                                <p style="
+                                   font-size: 24px;
+                                   ">${tweet.like_count} Likes</p>
+                                <a href="?tweet_id=${tweet.id}" id="like" style="
+                                   background-repeat: no-repeat;
+                                   background-size: cover;
+                                   width: 60px;
+                                   height: 60px;
+                                   " ></a>
+                        </div>
                     </div>
                 </c:forEach>
             </div>

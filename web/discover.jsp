@@ -88,11 +88,11 @@
                      padding-bottom: 50px;
                      padding-top: 50px;
                      ">
-                    <img src="GetImage?username=${user.username}" width="100" height="100" style="
+                    <img src="GetImage?username=${user.username}" width="140" height="200" style="
                             border-radius: 100%;
                             border: 1px solid black;
                             background: url('assets/person.svg') no-repeat;
-                            background-size: cover;
+                            background-size: contain;
                             margin-top: 15px;
                             " 
                         />
@@ -104,6 +104,9 @@
                     <a href="?followed_by_user_id=${user_id}&following_user_id=${user.getId()}" style="
                        font-size: 18px;
                        " id="${user.getId()}" class="followBtn">Follow</a>
+                    <a href="PublicProfile?username=${user.getUsername()}" style="
+                       font-size: 18px;
+                       " class="followBtn">View Profile</a>
                 </article>
             </c:forEach>
         </section>   

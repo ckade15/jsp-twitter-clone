@@ -51,7 +51,12 @@ public class Profile extends HttpServlet {
             request.setAttribute("filename", user.getFilename());
 
             ArrayList<Tweet> tweets = TweetModel.getProfileTweets(user.getId());
-            request.setAttribute("tweets", tweets);
+            if (!tweets.isEmpty()){
+                request.setAttribute("tweets", tweets);
+            }else{
+                request.setAttribute("tweets", null);
+            }
+            
 
             String url = "/profile.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);

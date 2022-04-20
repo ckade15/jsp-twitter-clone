@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.servlet.annotation.MultipartConfig;
 
+@MultipartConfig(maxFileSize = 1000000000)
 public class UserModel {
     
     public static boolean login(User user){
@@ -326,6 +328,29 @@ public class UserModel {
         following.addAll(FollowerModel.getFollowing(userId));
         
         return following;
+    }
+    
+    public static ArrayList<Integer> getId(){
+        ArrayList<Integer> ids = new ArrayList<>();
+        try{
+            Connection connection = DatabaseConnection.getConnection();
+            String query = "select id from user";
+            Statement statement = connection.createStatement();
+            
+            ResultSet results = statement.executeQuery(query);
+            
+            while (results.next()){
+                ids.add(results.getInt("id"));
+                
+            }
+            connection.close();
+            results.close();
+            statement.close();
+        }catch(Exception e){
+            
+        }
+        
+        return ids;
     }
     
 }

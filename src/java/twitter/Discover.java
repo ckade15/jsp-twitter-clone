@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author chris
  */
+@MultipartConfig(maxFileSize = 1000000000)
 public class Discover extends HttpServlet {
 
     /**
@@ -49,7 +51,13 @@ public class Discover extends HttpServlet {
                 response.sendRedirect(url);
             }
         }else{
-            ArrayList<User> users = UserModel.getUsers();
+            ArrayList<Integer> ids = UserModel.getId();
+            ArrayList<User> users = new ArrayList<>();
+            for (int id : ids){
+               users.add(UserModel.getUser(id));
+            }
+            
+            
             request.setAttribute("users", users);
 
             HttpSession session = request.getSession();

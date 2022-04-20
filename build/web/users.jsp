@@ -133,13 +133,22 @@
                             <p style="
                                font-size: 24px;
                                margin-left: 35px;
-                               ">Author: ${tweet.author} </p>
-                            <img src="GetImage?username=${tweet.author}" width="80" height="80" style="
+                               ">Author:&nbsp;&nbsp; 
+                                <a href="PublicProfile?username=${tweet.author}" style="
+                                    font-size: 24px;
+                                    margin-left: 35px;
+                                    text-decoration: none;
+                                    
+                                    ">${tweet.author}</a> </p>
+                            <img src="GetImage?username=${tweet.author}" width="80" height="100" style="
                                 margin-top:20px;
                                 margin-right: 50px;
                                 margin-left: 40px;
                                 border-radius: 100%;
                                 border: 2px solid #0000fa;
+                                background-image: url('assets/person.svg');
+                                background-size: contain;
+                                background-repeat: no-repeat;
                                 " id="profile-pic" />
                         </div>
                         <p style="
@@ -149,7 +158,9 @@
                         <p style="
                            font-size: 24px;
                            margin-bottom: 40px;
-                           margin-top: 10px;"
+                           margin-top: 10px;
+                           width: 78%;
+                           "
                            ><c:out value="${tweet.text}" /></p>
                         <p>
                             <c:if test="${(tweet.getFilename() != null || tweet.getFilename().equalsIgnoreCase(''))}" >
@@ -177,6 +188,13 @@
                                    width: 60px;
                                    height: 60px;
                                    " ></a>
+                            </div>
+                            
+                        </c:if>
+                        <c:if test="${(tweet.author == username)}" >
+                            <div style="
+                                 padding-top: 3em;
+                                 ">
                             </div>
                             
                         </c:if>

@@ -6,6 +6,7 @@ package twitter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,18 +35,29 @@ public class PublicProfile extends HttpServlet {
         String username = (String)session.getAttribute("username");
         User user = UserModel.getUser(username);
         int id = user.getId();
+        User view_user = UserModel.getUser(request.getParameter("username"));
         
-        String name = request.getParameter("user");
-        request.setAttribute("user", name);
+        request.setAttribute("user", view_user);
         
-        int following_id = Integer.parseInt(request.getParameter("follow_id"));
+        if(view_user.getUsername().equalsIgnoreCase(user.getUsername())){
+            response.sendRedirect("profile.jsp");
+        }
+        else if(request.getParameter("tweet_id") != null){
+            TweetModel.likeTweet(Integer.parseInt(request.getParameter("tweet_id")));
+        }
+        else{
+            int following_id = view_user.getId();
+
+            request.setAttribute("following", UserModel.ensureFollowed(id, following_id));
+
+            ArrayList<Tweet> tweets = TweetModel.getProfileTweets(following_id);
+            request.setAttribute("tweets", TweetModel.getProfileTweets(following_id));
+
+            String url = "/public_profile.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+            
+        }
         
-        request.setAttribute("following", UserModel.ensureFollowed(id, following_id));
-        
-        request.setAttribute("tweets", TweetModel.getProfileTweets(following_id));
-        
-        String url = "/public_profile.jsp";
-        getServletContext().getRequestDispatcher(url).forward(request, response);
         
         
     }

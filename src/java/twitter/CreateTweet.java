@@ -23,7 +23,7 @@ import javax.servlet.http.Part;
  *
  * @author chris
  */
-@MultipartConfig(maxFileSize = 1000000)
+@MultipartConfig(maxFileSize = 1000000000)
 public class CreateTweet extends HttpServlet {
 
     /**
@@ -46,6 +46,7 @@ public class CreateTweet extends HttpServlet {
             String url = "/create_tweet.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
+        
         
     }
     
