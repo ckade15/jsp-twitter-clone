@@ -44,6 +44,10 @@
         <servlet-name>DeleteTweet</servlet-name>
         <servlet-class>twitter.DeleteTweet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PublicProfile</servlet-name>
+        <servlet-class>twitter.PublicProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Twitter</servlet-name>
         <url-pattern>/Twitter</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>DeleteTweet</servlet-name>
         <url-pattern>/DeleteTweet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PublicProfile</servlet-name>
+        <url-pattern>/PublicProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

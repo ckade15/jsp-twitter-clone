@@ -1,9 +1,9 @@
 <%-- 
-    Document   : profile
-    Created on : Apr 14, 2022, 10:21:25 PM
+    Document   : public_profile
+    Created on : Apr 19, 2022, 10:00:02 PM
     Author     : chris
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -64,7 +64,7 @@
     <body>
         <header>
             <img src="assets/twitter-logo.png" id="twitter-logo"/>
-            <h2>Welcome to Twitter, ${username}!</h2>
+            
             <div style="
                  width: 50%;
                  display: flex;
@@ -76,92 +76,17 @@
             </div>
             
         </header>
-            <section style="
-                     margin-top: 20px;
-                     ">
-                      
+        <section style="
+            margin-top: 20px;
+            ">
+            <h2>${username}'s Profile</h2>        
             <c:if test="${(filename != null)}">
                 <img src="GetImage?username=${username}" width="340" height="400" style="
                      margin-top:20px;
                      margin-right: 50px;
                      " id="profile-pic" />
-                <div style="
-                     position: absolute;
-                     width: 100%;
-                     ">
-                    <a href="?profile_del=${username}" style="
-                       background-image: url('assets/del_white.svg');
-                       background-position: 5px;
-                       height: 30px;
-                       width: 30px;
-                       background-repeat: no-repeat;
-                       background-size: auto;
-                       position: absolute;
-                       margin-left: 460px;
-                       margin-top: 180px;
-                       border-radius: 100%;
-                       background-color: navy;
-                       padding: 10px;
-                       border: 3px solid red;
-                       " id="delete"></a>
-                </div>
+                
             </c:if>
-                
-                
-
-                <form action="Upload" method="post" enctype="multipart/form-data" style="
-                      background: gainsboro;
-                      padding: 20px;
-                      
-                      width: 40%;
-                      border: 3px outset navy;
-                      ">
-                    <h5 style="
-                        font-size: 35px;
-                        color: navy;
-                        ">Account Information</h5>  
-                    <p style="
-                        font-size: 26px;
-                        ">Username: ${username}</p>
-                    <c:if test="${(filename == null)}">
-                        <p style="
-                           font-size: 26px;
-                           color: navy;
-                           
-                           ">Upload a profile picture</p>
-                    </c:if>
-                    <c:if test="${(filename != null)}">
-                        <p style="
-                           font-size: 26px;
-                           ">Update your profile picture</p>
-                    </c:if>
-
-                        <div style="
-                             display: flex;
-                             justify-content: center;
-                             place-items: center;
-                             
-                             ">
-                        <input type="file" accept="image/*" name="filename" style="
-                               font-size: 16px;
-                               margin-left: 60px;" id="filename"/>
-                        <input type="button" onClick="document.getElementById('filename').value = '';"
-                               value="Clear"
-                               id="clear"
-                               style="
-                               font-size: 16px;
-                               "
-                               />
-                    </div>
-                    <input type="hidden" name="action" value="upload"/>
-                    <input type="submit" value="Upload" class="profile" id="submit" style="
-                           margin-left: 100px;
-                           margin-top: 40px;
-                           margin-bottom: 40px;
-                           "/>
-            </form>
-            
-            
         </section>
         <hr style="
             width: 60%;
@@ -191,19 +116,7 @@
                color: navy;
                font-weight: bold;
                margin-top: 35px;
-               ">Your Tweets</p>
-            <a href="CreateTweet">
-                <img src="assets/black_add.svg" style="
-                     width: 80px;
-                     height: 80px;
-                     margin-left: 700px;
-                     margin-top: 10px;
-                     margin-bottom: 40px;
-                     border-radius: 100%;
-                     background: lightblue;
-                     " 
-                     id="add"
-                />
+               ">${username} Tweets</p>
             </a>
             <div style="
                  width: 100%;

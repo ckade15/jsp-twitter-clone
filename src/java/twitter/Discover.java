@@ -41,10 +41,12 @@ public class Discover extends HttpServlet {
             
             if(UserModel.ensureFollowed(followed_by_user_id, following_user_id)){
                 UserModel.unfollow(followed_by_user_id, following_user_id);
-                response.sendRedirect("Discover");
+                String url = "Discover";
+                response.sendRedirect(url);
             }else{
                 UserModel.followUser(followed_by_user_id, following_user_id);
-                response.sendRedirect("Discover");
+                String url = "Discover";
+                response.sendRedirect(url);
             }
         }else{
             ArrayList<User> users = UserModel.getUsers();
@@ -53,8 +55,11 @@ public class Discover extends HttpServlet {
             HttpSession session = request.getSession();
             String username = (String)session.getAttribute("username");
             User user = UserModel.getUser(username);
+            int id = user.getId();
+            
+            request.setAttribute("following", FollowerModel.getFollowing(id));
         
-        request.setAttribute("user_id", user.getId());
+            request.setAttribute("user_id", id);
             String url = "/discover.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response); 
         }

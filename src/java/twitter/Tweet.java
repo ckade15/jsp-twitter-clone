@@ -9,6 +9,18 @@ public class Tweet {
     private Timestamp timestamp;
     private int user_id;
     private String filename;
+    private String author;
+
+    public Tweet(int id, String text, Timestamp timestamp, int user_id, String filename, String author) {
+        this.id = id;
+        this.text = text;
+        this.timestamp = timestamp;
+        this.user_id = user_id;
+        this.filename = filename;
+        this.author = author;
+    }
+    
+    
 
     public Tweet(int id, String text, int user_id, String filename) {
         this.id = id;
@@ -29,6 +41,14 @@ public class Tweet {
         this.timestamp = timestamp;
         this.user_id = user_id;
         this.filename = filename;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
     
     

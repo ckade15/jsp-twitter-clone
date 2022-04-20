@@ -33,116 +33,17 @@ public class Twitter extends HttpServlet {
             response.sendRedirect("Login");
             return;
         }
+        
+        User user = UserModel.getUser(sessionUserName);
+        
+        ArrayList<Tweet> homeTweets = TweetModel.getHomeTweets(user.getId());
+        request.setAttribute("homeTweets", homeTweets);
+        
 
-        if (action == null) {
-            action = "listUsers";
-        }
-
-        if (action.equalsIgnoreCase("listUsers")) {
-
-            ArrayList<User> users = UserModel.getUsers();
-            request.setAttribute("users", users);
-
-            String url = "/users.jsp";
-            getServletContext().getRequestDispatcher(url).forward(request, response);
-        } else if (action.equalsIgnoreCase("createUser")) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-
-            if ( username == null || password == null){
-                String error = "username or password is missing";
-                request.setAttribute("error", error);
-                String url = "/error.jsp";
-                getServletContext().getRequestDispatcher(url).forward(request, response);
-            }
-            
-            try {
-
-                //https://www.geeksforgeeks.org/sha-256-hash-in-java/
-                String hashedPassword = toHexString(getSHA(password));
-                
-                User user = new User(0, username, hashedPassword);
-                
-                // Handles redirect if user already exists
-                if (UserModel.addUser(user)){
-                    response.sendRedirect("Twitter");
-                }else{
-                    String error = "Username already exists";
-                    request.setAttribute("error", error);
-                    String url = "/create_user.jsp";
-                    getServletContext().getRequestDispatcher(url).forward(request, response);
-                }
-                
-                
-
-            } catch (Exception ex) {
-                exceptionPage(ex, request, response, "/create_user.jsp");
-            }
-
-        }
-        else if (action.equalsIgnoreCase("updateUser")) {
-            String id = request.getParameter("id");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-
-            if ( id == null || username == null || password == null){
-                String error = "id or username or password is missing";
-                request.setAttribute("error", error);
-                String url = "/error.jsp";
-                getServletContext().getRequestDispatcher(url).forward(request, response);
-            }
-            
-            try {
-
-                //https://www.geeksforgeeks.org/sha-256-hash-in-java/
-                String hashedPassword = toHexString(getSHA(password));
-                
-                User user = new User(Integer.parseInt(id), username, hashedPassword);
-                
-                UserModel.updateUser(user);
-                
-                response.sendRedirect("Twitter");
-
-            } catch (Exception ex) {
-                exceptionPage(ex, request, response, "/error.jsp");
-            }
-
-        } else if (action.equalsIgnoreCase("deleteUser")) {
-            String id = request.getParameter("id");
-            if ( id == null ){
-                String error = "id is missing";
-                request.setAttribute("error", error);
-                String url = "/error.jsp";
-                getServletContext().getRequestDispatcher(url).forward(request, response);
-            }
-            
-            try {
-
-               
-                User user = new User(Integer.parseInt(id), "", "");
-                
-                UserModel.deleteUser(user);
-                
-                response.sendRedirect("Twitter");
-
-            } catch (Exception ex) {
-                exceptionPage(ex, request, response, "/error.jsp");
-            }
-
-        } else if (action.equalsIgnoreCase("logout")){
-            session = request.getSession();
-            session.invalidate();
-            response.sendRedirect("login.jsp");
-            
-        }
+        getServletContext().getRequestDispatcher("/users.jsp").forward(request, response);
     }
 
-    private void exceptionPage(Exception ex, HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException {
-        String error = ex.toString();
-        request.setAttribute("error", error);
-        String url = path;
-        getServletContext().getRequestDispatcher(url).forward(request, response);
-    }
+
 
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
         // Static getInstance method is called with hashing SHA 

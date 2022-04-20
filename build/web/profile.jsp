@@ -46,6 +46,20 @@
             });
             
         </script>
+        <style>
+            #clear{
+                color: beige;
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 15px;
+                cursor: pointer;
+                background-color: #d32b1c;
+            }
+            #clear:hover{
+              background-color: lightsalmon;  
+              color: #333333;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -98,16 +112,28 @@
                 <form action="Upload" method="post" enctype="multipart/form-data" style="
                       background: gainsboro;
                       padding: 20px;
+                      
                       width: 40%;
                       border: 3px outset navy;
                       ">
-                    <h5>Account Information</h5>  
-                    <p>Username: ${username}</p>
+                    <h5 style="
+                        font-size: 35px;
+                        color: navy;
+                        ">Account Information</h5>  
+                    <p style="
+                        font-size: 26px;
+                        ">Username: ${username}</p>
                     <c:if test="${(filename == null)}">
-                        <p>Upload a profile picture</p>
+                        <p style="
+                           font-size: 26px;
+                           color: navy;
+                           
+                           ">Upload a profile picture</p>
                     </c:if>
                     <c:if test="${(filename != null)}">
-                        <p>Update your profile picture</p>
+                        <p style="
+                           font-size: 26px;
+                           ">Update your profile picture</p>
                     </c:if>
 
                         <div style="
@@ -117,25 +143,21 @@
                              
                              ">
                         <input type="file" accept="image/*" name="filename" style="
-                               font-size: 15px;
+                               font-size: 16px;
                                margin-left: 60px;" id="filename"/>
                         <input type="button" onClick="document.getElementById('filename').value = '';"
-                               style="
-                               color: beige;
-                               padding: 10px;
-                               font-size: 14px;
-                               border-radius: 15px;
-                               cursor: pointer;
-                               background-color: #d32b1c;
-                               "
                                value="Clear"
                                id="clear"
+                               style="
+                               font-size: 16px;
+                               "
                                />
                     </div>
                     <input type="hidden" name="action" value="upload"/>
                     <input type="submit" value="Upload" class="profile" id="submit" style="
                            margin-left: 100px;
                            margin-top: 40px;
+                           margin-bottom: 40px;
                            "/>
             </form>
             
@@ -144,7 +166,7 @@
         <hr style="
             width: 60%;
             height: 2px;
-            margin: 70px auto;
+            margin: 200px auto;
             background-image: linear-gradient(to top, #020024, #091579, #00d4ff);
             border-radius: 15px;
             ">
@@ -156,7 +178,7 @@
                  margin-right: auto;
                  margin-bottom: 40px;
                  margin-top: 40px;
-                 width: 60%;
+                 width: 80%;
                  padding-bottom: 50px;
                  background-color: lightgray;
                  border-radius: 15px;
@@ -165,55 +187,69 @@
                  place-items: center;
                  ">
             <p style="
-               font-size: 26px;
+               font-size: 40px;
                color: navy;
                font-weight: bold;
                margin-top: 35px;
                ">Your Tweets</p>
             <a href="CreateTweet">
                 <img src="assets/black_add.svg" style="
-                     width: 50px;
-                     height: 50px;
-                     margin-left: 500px;
+                     width: 80px;
+                     height: 80px;
+                     margin-left: 700px;
                      margin-top: 10px;
+                     margin-bottom: 40px;
                      border-radius: 100%;
                      background: lightblue;
                      " 
                      id="add"
                 />
             </a>
-            <c:forEach var="tweet" items="${tweets}">
-                <div style="
-                     width: 50%;
-                     background-color: beige;
-                     display: flex;
-                     flex-direction: column;
-                     height: auto;
-                     justify-content: center;
-                     place-items: center;
-                     margin-top: 30px;
-                     padding-top: 30px;
-                     padding-bottom: 30px;
-                     margin-bottom: 15px;
-                     border-radius: 15px;
-                     ">
-                    <p>Time:&nbsp;&nbsp;&nbsp;<c:out value="${tweet.timestamp}" /><p>
-                    <p style="
-                       margin-bottom: 40px;
-                       margin-top: 10px;"
-                       >Content:&nbsp;&nbsp;&nbsp;<c:out value="${tweet.text}" /></p>
-                    <p>
-                        <c:if test="${(tweet.getFilename() != null || tweet.getFilename().equalsIgnoreCase(''))}" >
-                            <img class="post" src="GetTweetImage?filename=${tweet.getId()}"  style="
-                                 width: 300px;
-                                 height: 300px;
-                                 "/>
-                        </c:if>
-                    </p>
-                    <a href="DeleteTweet?tweet_id=${tweet.getId()}" id="delBtn" style="margin-bottom: 30px; margin-top: 10px;">Delete Tweet</a>
-                </div>
-            </c:forEach>
-            
+            <div style="
+                 width: 100%;
+                 display: flex;
+                 flex-wrap: wrap;
+                 column-count: 2;
+                 justify-content: center;
+                 place-items: center;
+                 column-gap: 30px;
+                 row-gap: 30px;
+                 ">
+                <c:forEach var="tweet" items="${tweets}">
+                    <div style="
+                         width: 30%;
+                         background-color: beige;
+                         display: flex;
+                         flex-direction: column;
+                         height: auto;
+                         justify-content: center;
+                         place-items: center;
+                         margin-top: 30px;
+                         padding: 50px;
+                         margin-bottom: 15px;
+                         border-radius: 15px;
+                         border: 4px inset lavender;
+                         ">
+                        <p>Author: ${tweet.author} </p>
+                        <p>Time:&nbsp;&nbsp;&nbsp;<c:out value="${tweet.timestamp}" /><p>
+
+                        <p style="
+                           margin-bottom: 40px;
+                           margin-top: 10px;"
+                           >Content:&nbsp;&nbsp;&nbsp;<c:out value="${tweet.text}" /></p>
+                        <p>
+                            <c:if test="${(tweet.getFilename() != null || tweet.getFilename().equalsIgnoreCase(''))}" >
+                                <img class="post" src="GetTweetImage?filename=${tweet.getId()}"  style="
+                                     width: 300px;
+                                     height: 300px;
+                                     border: 1px solid black;
+                                     "/>
+                            </c:if>
+                        </p>
+                        <a href="DeleteTweet?tweet_id=${tweet.getId()}" id="delBtn" style="margin-bottom: 30px; margin-top: 10px;">Delete Tweet</a>
+                    </div>
+                </c:forEach>
+            </div>
         </section>
 
     </body>

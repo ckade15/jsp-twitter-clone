@@ -64,8 +64,9 @@ public class TweetModel {
                 if (filename == null || filename.equals("")){
                     filename = null;
                 }
+                User creator = UserModel.getUser(user_id);
                 
-                Tweet tweet = new Tweet(tweet_id, text, timestamp, user_id,  filename);
+                Tweet tweet = new Tweet(tweet_id, text, timestamp, user_id,  filename, creator.getUsername());
                 tweets.add(tweet);
             }
             statement.executeUpdate();
@@ -83,6 +84,22 @@ public class TweetModel {
         }
         
         return tweets;
+    }
+    
+    public static ArrayList<Tweet> getHomeTweets(int user_id){
+        ArrayList<Tweet> homeTweets = new ArrayList<>();
+       
+        for (Follower follower : UserModel.getFollowing(user_id)){
+            ArrayList<Tweet> twt = TweetModel.getProfileTweets(follower.getFollowing_user_id());
+            
+            homeTweets.addAll(twt);
+
+        }
+        homeTweets.addAll(TweetModel.getProfileTweets(user_id));
+            
+        
+        return homeTweets;
+            
     }
     
     // https://www.codejava.net/java-ee/servlet/java-file-upload-example-with-servlet-30-api

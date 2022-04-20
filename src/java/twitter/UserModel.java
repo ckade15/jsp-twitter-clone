@@ -40,6 +40,41 @@ public class UserModel {
         }        
     }
     
+    public static User getUser(int id){
+        User user = null;
+        try{
+            Connection connection = DatabaseConnection.getConnection();
+            
+            String query = "select id, username, password, filename from user where id = ?";
+           
+            PreparedStatement statement = connection.prepareStatement(query);
+            
+            statement.setInt(1, id);
+            ResultSet results = statement.executeQuery();
+            
+            
+            while ( results.next() ){
+                String username = results.getString("username");
+                String password = results.getString("password");
+                String filename = results.getString("filename");
+                
+                user = new User(id, username, password, filename);
+                
+
+            }
+            
+            results.close();
+            statement.close();
+            connection.close();
+            
+        }
+        catch ( Exception ex ){
+            System.out.println(ex);
+        }
+        
+        return user;
+    }
+    
     public static User getUser(String username){
         User user = null;
         try{
@@ -272,9 +307,8 @@ public class UserModel {
             statement.setInt(1, followed_by_user_id);
             statement.setInt(2, following_user_id);
             
-            ResultSet result = statement.executeQuery();
-            
             statement.executeUpdate();
+            
             statement.close();
             connection.close();
 
@@ -285,4 +319,14 @@ public class UserModel {
         }
     }
     
+    public static ArrayList<Follower> getFollowing(int userId){
+        ArrayList<Follower> following = new ArrayList<>();
+        
+        
+        following.addAll(FollowerModel.getFollowing(userId));
+        
+        return following;
+    }
+    
 }
+
