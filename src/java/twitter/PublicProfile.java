@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,6 +29,24 @@ public class PublicProfile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        String username = (String)session.getAttribute("username");
+        User user = UserModel.getUser(username);
+        int id = user.getId();
+        
+        String name = request.getParameter("user");
+        request.setAttribute("user", name);
+        
+        int following_id = Integer.parseInt(request.getParameter("follow_id"));
+        
+        request.setAttribute("following", UserModel.ensureFollowed(id, following_id));
+        
+        request.setAttribute("tweets", TweetModel.getProfileTweets(following_id));
+        
+        String url = "/public_profile.jsp";
+        getServletContext().getRequestDispatcher(url).forward(request, response);
+        
         
     }
 

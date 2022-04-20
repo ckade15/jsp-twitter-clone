@@ -47,6 +47,9 @@
             
         </script>
         <style>
+            p{
+                font-size: 24px;
+            }
             #clear{
                 color: beige;
                 padding: 10px;
@@ -236,7 +239,7 @@
                         <p style="
                            margin-bottom: 40px;
                            margin-top: 10px;"
-                           >Content:&nbsp;&nbsp;&nbsp;<c:out value="${tweet.text}" /></p>
+                           ><c:out value="${tweet.text}" /></p>
                         <p>
                             <c:if test="${(tweet.getFilename() != null || tweet.getFilename().equalsIgnoreCase(''))}" >
                                 <img class="post" src="GetTweetImage?filename=${tweet.getId()}"  style="
@@ -246,6 +249,7 @@
                                      "/>
                             </c:if>
                         </p>
+                        <p>${tweet.like_count} Likes</p>
                         <a href="DeleteTweet?tweet_id=${tweet.getId()}" id="delBtn" style="margin-bottom: 30px; margin-top: 10px;">Delete Tweet</a>
                     </div>
                 </c:forEach>

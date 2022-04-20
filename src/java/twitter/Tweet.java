@@ -10,6 +10,20 @@ public class Tweet {
     private int user_id;
     private String filename;
     private String author;
+    private int like_count;
+
+    
+    public Tweet(int id, String text, Timestamp timestamp, int user_id, String filename, String author, int like_count) {
+        this.id = id;
+        this.text = text;
+        this.timestamp = timestamp;
+        this.user_id = user_id;
+        this.filename = filename;
+        this.author = author;
+        this.like_count = like_count;
+    }
+    
+    
 
     public Tweet(int id, String text, Timestamp timestamp, int user_id, String filename, String author) {
         this.id = id;
@@ -42,6 +56,16 @@ public class Tweet {
         this.user_id = user_id;
         this.filename = filename;
     }
+
+    public int getLike_count() {
+        return like_count;
+    }
+
+    public void setLike_count(int like_count) {
+        this.like_count = like_count;
+    }
+    
+    
 
     public String getAuthor() {
         return author;

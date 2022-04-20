@@ -23,7 +23,12 @@
             });
         </script>
         <style>
-            
+            #like{
+                background-image: url('assets/b_like.svg');
+            }
+            #like:hover{
+               background-image: url('assets/w_like.svg'); 
+            }
         </style>
     </head>
     <body>
@@ -117,9 +122,26 @@
                          border-radius: 15px;
                          border: 4px inset lavender;
                          ">
-                        <p style="
-                           font-size: 24px;
-                           ">Author: ${tweet.author} </p>
+                        <div style="
+                             display: flex;
+                             justify-content: space-between;
+                             padding-right: 40px;
+                             padding-left: 60px;
+                             place-items: center;
+                             width: 100%;
+                             ">
+                            <p style="
+                               font-size: 24px;
+                               margin-left: 35px;
+                               ">Author: ${tweet.author} </p>
+                            <img src="GetImage?username=${tweet.author}" width="80" height="80" style="
+                                margin-top:20px;
+                                margin-right: 50px;
+                                margin-left: 40px;
+                                border-radius: 100%;
+                                border: 2px solid #0000fa;
+                                " id="profile-pic" />
+                        </div>
                         <p style="
                            font-size: 24px;
                            ">Time:&nbsp;&nbsp;&nbsp;<c:out value="${tweet.timestamp}" /><p>
@@ -128,7 +150,7 @@
                            font-size: 24px;
                            margin-bottom: 40px;
                            margin-top: 10px;"
-                           >Content:&nbsp;&nbsp;&nbsp;<c:out value="${tweet.text}" /></p>
+                           ><c:out value="${tweet.text}" /></p>
                         <p>
                             <c:if test="${(tweet.getFilename() != null || tweet.getFilename().equalsIgnoreCase(''))}" >
                                 <img class="post" src="GetTweetImage?filename=${tweet.getId()}"  style="
@@ -139,7 +161,25 @@
                                      "/>
                             </c:if>
                         </p>
-                        
+                        <c:if test="${(tweet.author != username)}" >
+                            <div style="
+                                 display: flex;
+                                 justify-content: space-evenly;
+                                 place-items: center;
+                                 width: 100%;
+                                 ">
+                                <p style="
+                                   font-size: 24px;
+                                   ">${tweet.like_count} Likes</p>
+                                <a href="?like_tweet_id=${tweet.id}" id="like" style="
+                                   background-repeat: no-repeat;
+                                   background-size: cover;
+                                   width: 60px;
+                                   height: 60px;
+                                   " ></a>
+                            </div>
+                            
+                        </c:if>
                     </div>
                 </c:forEach>
             </c:if>

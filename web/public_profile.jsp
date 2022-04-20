@@ -79,9 +79,9 @@
         <section style="
             margin-top: 20px;
             ">
-            <h2>${username}'s Profile</h2>        
+            <h2>${user}'s Profile</h2>        
             <c:if test="${(filename != null)}">
-                <img src="GetImage?username=${username}" width="340" height="400" style="
+                <img src="GetImage?username=${name}" width="340" height="400" style="
                      margin-top:20px;
                      margin-right: 50px;
                      " id="profile-pic" />
@@ -116,7 +116,7 @@
                color: navy;
                font-weight: bold;
                margin-top: 35px;
-               ">${username} Tweets</p>
+               ">${name} Tweets</p>
             </a>
             <div style="
                  width: 100%;
@@ -159,7 +159,6 @@
                                      "/>
                             </c:if>
                         </p>
-                        <a href="DeleteTweet?tweet_id=${tweet.getId()}" id="delBtn" style="margin-bottom: 30px; margin-top: 10px;">Delete Tweet</a>
                     </div>
                 </c:forEach>
             </div>

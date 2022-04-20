@@ -39,8 +39,16 @@ public class Twitter extends HttpServlet {
         ArrayList<Tweet> homeTweets = TweetModel.getHomeTweets(user.getId());
         request.setAttribute("homeTweets", homeTweets);
         
+        String tweet_id = request.getParameter("like_tweet_id");
+        
+        if (tweet_id != null) {
+            TweetModel.likeTweet(Integer.parseInt(tweet_id));
+            response.setHeader("Refresh", ".1; URL=http://localhost:8080/Twitter/Twitter");
+        }else{
+          getServletContext().getRequestDispatcher("/users.jsp").forward(request, response);  
+        }
 
-        getServletContext().getRequestDispatcher("/users.jsp").forward(request, response);
+        
     }
 
 

@@ -22,6 +22,27 @@ import javax.servlet.http.Part;
  * @author chris
  */
 public class TweetModel {
+    public static void likeTweet(int id){
+        try{
+            Connection connection = DatabaseConnection.getConnection();
+
+            String query = "UPDATE tweet set like_count = like_count + 1 WHERE id = ? ";
+            
+            PreparedStatement statement = connection.prepareStatement(query);
+            
+            
+            statement.setInt(1, id);
+            
+            statement.execute();
+            
+            statement.close();
+            connection.close();
+            
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    
     public static void deleteTweet(int id){
         try{
             Connection connection = DatabaseConnection.getConnection();
@@ -61,12 +82,13 @@ public class TweetModel {
                 user_id = results.getInt("user_id");
                 Timestamp timestamp = results.getTimestamp("timestamp");
                 String filename = results.getString("filename");
+                int like_count = results.getInt("like_count");
                 if (filename == null || filename.equals("")){
                     filename = null;
                 }
                 User creator = UserModel.getUser(user_id);
                 
-                Tweet tweet = new Tweet(tweet_id, text, timestamp, user_id,  filename, creator.getUsername());
+                Tweet tweet = new Tweet(tweet_id, text, timestamp, user_id,  filename, creator.getUsername(), like_count);
                 tweets.add(tweet);
             }
             statement.executeUpdate();

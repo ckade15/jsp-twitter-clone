@@ -3,19 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/PublicProfile.java</file>
+            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/public_profile.jsp</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Discover.java</file>
-            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Follower.java</file>
-            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/create_tweet.jsp</file>
-            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/CreateAccount.java</file>
+            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/profile.jsp</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/TweetModel.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Twitter.java</file>
-            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/DeleteTweet.java</file>
+            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Upload.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Tweet.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/UserModel.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/Profile.java</file>
-            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/discover.jsp</file>
-            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/profile.jsp</file>
-            <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/CreateTweet.java</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/web/users.jsp</file>
             <file>file:/C:/Users/chris/Documents/OCC/PHP/Twitter/src/java/twitter/FollowerModel.java</file>
         </group>
