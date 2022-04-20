@@ -34,19 +34,55 @@ public class PublicProfile extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String)session.getAttribute("username");
         User user = UserModel.getUser(username);
+        request.setAttribute("main_user", user);
         int id = user.getId();
         User view_user = UserModel.getUser(request.getParameter("username"));
         
         request.setAttribute("user", view_user);
+        String followed = request.getParameter("followed_by_user_id");
+        String following = request.getParameter("following_user_id");
         
-        if(view_user.getUsername().equalsIgnoreCase(user.getUsername())){
-            response.sendRedirect("profile.jsp");
-        }
-        else if(request.getParameter("tweet_id") != null){
+        if(request.getParameter("tweet_id") != null){
             TweetModel.likeTweet(Integer.parseInt(request.getParameter("tweet_id")));
+            int following_id = view_user.getId();
+
+            request.setAttribute("following", UserModel.ensureFollowed(id, following_id));
+
+            ArrayList<Tweet> tweets = TweetModel.getProfileTweets(following_id);
+            request.setAttribute("tweets", TweetModel.getProfileTweets(following_id));
+
+            String url = "/public_profile.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }else if(followed != null){
+            int followed_by_user_id = Integer.parseInt(followed);
+            int following_user_id = Integer.parseInt(following);
+            
+            if(UserModel.ensureFollowed(followed_by_user_id, following_user_id)){
+                UserModel.unfollow(followed_by_user_id, following_user_id);
+                String url = "PublicProfile?username=";
+                response.sendRedirect(url);
+            }else{
+                UserModel.followUser(followed_by_user_id, following_user_id);
+                int following_id = view_user.getId();
+            
+                request.setAttribute("user_id", id);
+
+                request.setAttribute("following", UserModel.ensureFollowed(id, following_id));
+
+                ArrayList<Tweet> tweets = TweetModel.getProfileTweets(following_id);
+                request.setAttribute("tweets", TweetModel.getProfileTweets(following_id));
+
+                String url = "/public_profile.jsp";
+                getServletContext().getRequestDispatcher(url).forward(request, response);
+            }
+        }
+        else if(view_user.getUsername().equalsIgnoreCase(user.getUsername())){
+            response.sendRedirect("profile.jsp");
         }
         else{
             int following_id = view_user.getId();
+            
+            request.setAttribute("user_id", id);
 
             request.setAttribute("following", UserModel.ensureFollowed(id, following_id));
 

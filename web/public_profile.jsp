@@ -67,6 +67,11 @@
             #like:hover{
                background-image: url('assets/w_like.svg'); 
             }
+            
+            #login{
+                margin-left: 70px;
+                font-size: 28px;
+            }
         
         </style>
     </head>
@@ -96,7 +101,15 @@
             <h2 style="
                 font-size: 40px;
                 
-                ">${user.getUsername()}'s Profile</h2>        
+                ">${user.getUsername()}'s Profile</h2>   
+                
+                <c:if test="${(UserModel.ensureFollowed())}" >
+                    <a href="?username=${main_user.getUsername()}&followed_by_user_id=${user_id}&following_user_id=${user.getId()}" class="profile" id="login">Follow ${user.getUsername()}</a>
+                </c:if>
+               <c:if test="${(!UserModel.ensureFollowed())}" >
+                    <a href="?username=${main_user.getUsername()}&followed_by_user_id=${user_id}&following_user_id=${user.getId()}" class="profile" id="login">Unfollow ${user.getUsername()}</a>
+                </c:if>
+                
             <c:if test="${(filename != null)}">
                 <img src="GetImage?username=${user}" width="340" height="400" style="
                      margin-top:20px;
@@ -186,7 +199,7 @@
                                 <p style="
                                    font-size: 24px;
                                    ">${tweet.like_count} Likes</p>
-                                <a href="?tweet_id=${tweet.id}" id="like" style="
+                                <a href="?tweet_id=${tweet.id}&username=${tweet.author}" id="like" style="
                                    background-repeat: no-repeat;
                                    background-size: cover;
                                    width: 60px;
