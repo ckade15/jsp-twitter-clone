@@ -66,10 +66,11 @@
     </head>
     <body>
         <header style="
+                padding: 25px;
                 margin-bottom: 50px;
                 ">
             <img src="assets/twitter-logo.png" id="twitter-logo"/>
-            <h2>Welcome to Twitter, ${username}!</h2>
+            
             <div style="
                  width: 50%;
                  display: flex;

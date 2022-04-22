@@ -23,7 +23,6 @@ public class Twitter extends HttpServlet {
             throws ServletException, IOException {
 
         
-        String action = request.getParameter("action");
         
         HttpSession session = request.getSession();
         String sessionUserName = (String)session.getAttribute("username");
@@ -37,7 +36,7 @@ public class Twitter extends HttpServlet {
         User user = UserModel.getUser(sessionUserName);
         
         ArrayList<Tweet> homeTweets = TweetModel.getHomeTweets(user.getId());
-        request.setAttribute("homeTweets", homeTweets);
+        request.setAttribute("tweets", homeTweets);
         
         String tweet_id = request.getParameter("like_tweet_id");
         

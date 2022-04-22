@@ -40,7 +40,7 @@
     <body>
         <header>
             <img src="assets/twitter-logo.png" id="twitter-logo"/>
-            <h2>Welcome to Twitter, ${username}!</h2>
+            <h2>Welcome to Twitter, ${username.getUsername()}!</h2>
             <div style="
                  display: flex; 
                  justify-content: center; 
@@ -104,9 +104,17 @@
                     <a href="?followed_by_user_id=${user_id}&following_user_id=${user.getId()}" style="
                        font-size: 18px;
                        " id="${user.getId()}" class="followBtn">Follow</a>
-                    <a href="PublicProfile?username=${user.getUsername()}" style="
-                       font-size: 18px;
-                       " class="followBtn">View Profile</a>
+                       <c:if test="${(user.getUsername() != username.getUsername())}">
+                            <a href="PublicProfile?username=${user.getUsername()}" style="
+                               font-size: 18px;
+                               " class="followBtn">View Profile</a>
+                           
+                       </c:if>
+                       <c:if test="${(user.getUsername() == username.getUsername())}">
+                           <a href="Profile" style="
+                               font-size: 18px;
+                               " class="followBtn">View Profile</a>
+                       </c:if>
                 </article>
             </c:forEach>
         </section>   

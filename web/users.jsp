@@ -102,9 +102,9 @@
                  justify-content: center;
                  place-items: center;
                  ">
-            <c:if test="${(homeTweets != null)}">
+            <c:if test="${(homeTweets == null)}">
                 
-                <c:forEach var="tweet" items="${homeTweets}">
+                <c:forEach var="tweet" items="${tweets}">
                     <div style="
                          width: 30%;
                          background-color: beige;
@@ -133,13 +133,26 @@
                             <p style="
                                font-size: 24px;
                                margin-left: 35px;
-                               ">Author:&nbsp;&nbsp; 
-                                <a href="PublicProfile?username=${tweet.author}" style="
-                                    font-size: 24px;
-                                    margin-left: 35px;
-                                    text-decoration: none;
+                               ">Author:&nbsp;&nbsp;
+                                <c:if test="${(tweet.author != username)}" >
+                                    <a href="PublicProfile?username=${tweet.author}" style="
+                                        font-size: 24px;
+                                        margin-left: 35px;
+                                        text-decoration: none;
+
+                                        ">${tweet.author}</a> 
                                     
-                                    ">${tweet.author}</a> </p>
+                                </c:if>
+                                <c:if test="${(tweet.author == username)}" >
+                                    <a href="Profile" style="
+                                        font-size: 24px;
+                                        margin-left: 35px;
+                                        text-decoration: none;
+
+                                        ">${tweet.author}</a> 
+                                    
+                                </c:if>
+                            </p>
                             <img src="GetImage?username=${tweet.author}" width="80" height="100" style="
                                 margin-top:20px;
                                 margin-right: 50px;
@@ -193,8 +206,14 @@
                         </c:if>
                         <c:if test="${(tweet.author == username)}" >
                             <div style="
-                                 padding-top: 3em;
+                                 display: flex;
+                                 justify-content: space-evenly;
+                                 place-items: center;
+                                 width: 100%;
                                  ">
+                                <p style="
+                                   font-size: 24px;
+                                   ">${tweet.like_count} Likes</p>
                             </div>
                             
                         </c:if>

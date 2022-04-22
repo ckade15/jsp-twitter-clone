@@ -96,26 +96,42 @@
         <section style="
             margin-top: 20px;
             display: flex;
+            flex-direction: column;
             
             ">
             <h2 style="
                 font-size: 40px;
                 
-                ">${user.getUsername()}'s Profile</h2>   
+                ">${view_user.getUsername()}'s Profile</h2>   
+            <div style="
+                 display: flex;
+                 height: 70px;
+                 justify-content: center;
+                 place-items: center;
+                 margin-top: 200px;
+                 margin-bottom: 200px;
+                 ">
                 
-                <c:if test="${(UserModel.ensureFollowed())}" >
-                    <a href="?username=${main_user.getUsername()}&followed_by_user_id=${user_id}&following_user_id=${user.getId()}" class="profile" id="login">Follow ${user.getUsername()}</a>
-                </c:if>
-               <c:if test="${(!UserModel.ensureFollowed())}" >
-                    <a href="?username=${main_user.getUsername()}&followed_by_user_id=${user_id}&following_user_id=${user.getId()}" class="profile" id="login">Unfollow ${user.getUsername()}</a>
-                </c:if>
+                <a id="${view_user.getId()}" 
+                   href="?username=${view_user.getUsername()}&followed_by_user_id=${main_user.getId()}&following_user_id=${view_user.getId()}" 
+                   class="profile" 
+                   id="login"
+                   style="
+                   padding: 20px;
+                   font-size: 30px;
+                   margin-left: 110px;
+                   
+                   ">Follow</a>
+                
+               
+            
                 
             <c:if test="${(filename != null)}">
-                <img src="GetImage?username=${user}" width="340" height="400" style="
+                <img src="GetImage?username=${view_user.getUsername()}" width="340" height="400" style="
                      margin-top:20px;
                      margin-right: 50px;
                      " id="profile-pic" />
-                <hr style="
+            </div><hr style="
             width: 60%;
             height: 2px;
             margin: 200px auto;
@@ -123,6 +139,7 @@
             border-radius: 15px;
             ">
             </c:if>
+                
         </section>
         
         <!-- Display users tweets with the option to delete tweets -->
@@ -147,7 +164,7 @@
                color: navy;
                font-weight: bold;
                margin-top: 35px;
-               "><c:out value="${name}"></c:out> Tweets</p>
+               "><c:out value="${view_user.getUsername()}"></c:out>'s Tweets</p>
             </a>
             <div style="
                  width: 100%;
@@ -180,7 +197,7 @@
                         <p style="
                            margin-bottom: 40px;
                            margin-top: 10px;"
-                           >Content:&nbsp;&nbsp;&nbsp;<c:out value="${tweet.text}" /></p>
+                           >&nbsp;&nbsp;&nbsp;<c:out value="${tweet.text}" /></p>
                         <p>
                             <c:if test="${(tweet.getFilename() != null || tweet.getFilename().equalsIgnoreCase(''))}" >
                                 <img class="post" src="GetTweetImage?filename=${tweet.getId()}"  style="
@@ -210,6 +227,17 @@
                 </c:forEach>
             </div>
         </section>
-
+        <script type="text/javascript" >
+            try{
+                if (${following}){
+                    console.log(${following})
+                    document.getElementById(${view_user.getId()}).innerText = "Unfollow";
+                }else{
+                    document.getElementById(${view_user.getId()}).innerText = "Follow";
+                }
+            }catch(ex){
+                console.log(ex)
+            }
+        </script>
     </body>
 </html>

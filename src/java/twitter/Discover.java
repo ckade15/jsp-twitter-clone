@@ -34,6 +34,7 @@ public class Discover extends HttpServlet {
             throws ServletException, IOException {
         
         
+        
         String followed = request.getParameter("followed_by_user_id");
         String following = request.getParameter("following_user_id");
         
@@ -62,6 +63,7 @@ public class Discover extends HttpServlet {
 
             HttpSession session = request.getSession();
             String username = (String)session.getAttribute("username");
+            request.setAttribute("username", UserModel.getUser(username));
             User user = UserModel.getUser(username);
             int id = user.getId();
             

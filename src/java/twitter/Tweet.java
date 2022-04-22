@@ -6,14 +6,14 @@ import java.sql.Timestamp;
 public class Tweet {
     private int id;
     private String text;
-    private Timestamp timestamp;
+    private String timestamp;
     private int user_id;
     private String filename;
     private String author;
     private int like_count;
 
     
-    public Tweet(int id, String text, Timestamp timestamp, int user_id, String filename, String author, int like_count) {
+    public Tweet(int id, String text, String timestamp, int user_id, String filename, String author, int like_count) {
         this.id = id;
         this.text = text;
         this.timestamp = timestamp;
@@ -25,7 +25,7 @@ public class Tweet {
     
     
 
-    public Tweet(int id, String text, Timestamp timestamp, int user_id, String filename, String author) {
+    public Tweet(int id, String text, String timestamp, int user_id, String filename, String author) {
         this.id = id;
         this.text = text;
         this.timestamp = timestamp;
@@ -45,11 +45,11 @@ public class Tweet {
 
     
     
-    public Tweet(int id, String text, Timestamp timestamp, int user_id) {
+    public Tweet(int id, String text, String timestamp, int user_id) {
         this(id, text, timestamp, user_id, null);
     }
 
-    public Tweet(int id, String text, Timestamp timestamp, int user_id, String filename) {
+    public Tweet(int id, String text, String timestamp, int user_id, String filename) {
         this.id = id;
         this.text = text;
         this.timestamp = timestamp;
@@ -85,7 +85,7 @@ public class Tweet {
         return text;
     }
 
-    public Timestamp getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 

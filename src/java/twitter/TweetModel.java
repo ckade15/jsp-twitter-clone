@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,19 +80,20 @@ public class TweetModel {
             while(results.next()){
                 int tweet_id = results.getInt("id");
                 String text = results.getString("text");
-                user_id = results.getInt("user_id");
+                int userId = results.getInt("user_id");
                 Timestamp timestamp = results.getTimestamp("timestamp");
                 String filename = results.getString("filename");
                 int like_count = results.getInt("like_count");
                 if (filename == null || filename.equals("")){
                     filename = null;
                 }
-                User creator = UserModel.getUser(user_id);
+                User creator = UserModel.getUser(userId);
+                String s = new SimpleDateFormat("MM/dd/yyyy - HH:mm:ss").format(timestamp);
                 
-                Tweet tweet = new Tweet(tweet_id, text, timestamp, user_id,  filename, creator.getUsername(), like_count);
+                Tweet tweet = new Tweet(tweet_id, text, s, userId,  filename, creator.getUsername(), like_count);
                 tweets.add(tweet);
             }
-            statement.executeUpdate();
+                
             statement.close();
             results.close();
             connection.close();
@@ -112,12 +114,22 @@ public class TweetModel {
         ArrayList<Tweet> homeTweets = new ArrayList<>();
        
         for (Follower follower : UserModel.getFollowing(user_id)){
-            ArrayList<Tweet> twt = TweetModel.getProfileTweets(follower.getFollowing_user_id());
-            
-            homeTweets.addAll(twt);
-
+            try{
+                
+                int follow = follower.getFollowing_user_id();
+                if (follow == user_id){
+                    
+                }else{
+                    ArrayList<Tweet> twt = TweetModel.getProfileTweets(follow);
+                    homeTweets.addAll(twt);
+                }
+            }catch(Exception e){
+                System.out.println(e);
+            }
         }
         homeTweets.addAll(TweetModel.getProfileTweets(user_id));
+            
+        
             
         
         return homeTweets;
