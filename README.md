@@ -6,6 +6,7 @@ Twitter clone created using Java Server Pages and Java Servlets.
 * Java Server Pages
 * SQL Server
 * JQuery
+* CSS
 <br><br>
 ## Application features include:
 * Follow and unfollow friends
